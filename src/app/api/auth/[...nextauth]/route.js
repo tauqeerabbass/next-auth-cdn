@@ -21,43 +21,48 @@ const handler = NextAuth({
           });
 
           const data = await res.json();
-          if (res.ok && data.user){
-            return {id: data.user.id, username: data.user.username, token: data.token};
+          // console.log("Authorize API response:", data.user.accessToken);
+
+          if (res.ok && data.user) {
+            return {
+              id: data.user.id,
+              username: data.user.username,
+              token: data.user.accessToken,
+            };
           }
 
           return null;
-
         } catch (error) {
-            console.log("Error occured ", error);
-            return null;
+          console.log("Error occured ", error);
+          return null;
         }
       },
     }),
   ],
   pages: {
-    signIn: "/login"
+    signIn: "/login",
   },
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   callbacks: {
-    async jwt({token, user}){
-        if (user){
-            // console.log("User from jwt", user);
-            token.id = user.id;
-            token.username = user.username;
-            token.token = user.token;
-        }
+    async jwt({ token, user }) {
+      if (user) {
+        // console.log("User from jwt", user.token);
+        token.id = user.id;
+        token.username = user.username;
+        token.token = user.token;
+      }
 
-        return token;
+      return token;
     },
-    async session({session, token}){
-        session.user.id = token.id;
-        session.user.username = token.username
-        session.user.token = token.token
-        return session;
-    }
-  }
+    async session({ session, token }) {
+      session.user.id = token.id;
+      session.user.username = token.username;
+      session.user.token = token.token;
+      return session;
+    },
+  },
 });
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST };

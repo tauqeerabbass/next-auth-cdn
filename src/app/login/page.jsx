@@ -27,7 +27,7 @@ export default function Login() {
       redirect: false,
     });
 
-    console.log("Login result:", result);
+    // console.log("Login result:", result);
 
     if (result?.ok) {
       console.log("Login Successful");
@@ -35,7 +35,7 @@ export default function Login() {
 
       localStorage.setItem("Name", "");
       localStorage.setItem("Username", username);
-      localStorage.setItem("Password", password);
+      // localStorage.setItem("Password", password);
 
       setShowToast(true);
       setTimeout(() => {
