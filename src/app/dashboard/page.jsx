@@ -165,7 +165,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="lower-div flex flex-col lg:flex lg:flex-row flex-1 lg:gap-5 lg:items-stretch">
-              <div className="left-box p-2 lg:my-3 w-full md:w-[350px] min-h-[60px] md:h-[70px] border border-[#d0d3d7] rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center md:self-end text-[#283845]">
+              <div className="left-box p-2 lg:my-3 w-full md:w-[350px] min-h-[60px] md:h-[70px] border border-[#d0d3d7] rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center lg:self-end text-[#283845]">
                 <div>
                   <p className="font-medium">Online Consultation</p>
                   <p
