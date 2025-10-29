@@ -80,153 +80,143 @@ export default function Dashboard() {
 
   return (
     <>
-      {doctorData.map((doctor, index) => (
-        <div
-          key={index}
-          className="main-div rounded-lg my-6 mx-4 shadow-md flex flex-col md:flex-row flex-wrap md:mx-10 p-4 lg:py-10"
-        >
-          <div className="left-div flex-1 min-w-[250px] lg:mx-28">
-            <div className="flex gap-4 ">
-              <img
-                className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover"
-                src={
-                  doctor?.user?.profile_picture_url ||
-                  "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"
-                }
-              ></img>
-              <div>
-                <h1 className="text-[#202c39] mb-1">
-                  {doctor?.user?.first_name} {doctor?.user?.last_name} |{" "}
-                  <span className="text-[#a3a9b0] text-sm">
-                    {doctor?.is_available ? "Available" : "Not Available"}{" "}
-                  </span>
-                </h1>
-                <p className="text-[#4f5b67]">{doctor?.doctor_type}</p>
-                <p className="font-semibold text-[#283845] bg-gray-300 rounded-md px-1 flex">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="green"
-                    className="size-4.5 mt-0.5 mr-1"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  {doctor?.qualifications}, {doctor?.specialization}
-                </p>
-                <p className="text-[#4f5b67] md:flex md:gap-1 md:items-center">
-                  <span className="font-semibold text-[#283845]">
-                    {doctor?.experience}
-                  </span>{" "}
-                  Experience |{" "}
-                  <br></br>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="#ffb955"
-                    className="size-4 inline mt-[-5px] mr-1 md:mr-0 md:mt-0"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="font-semibold text-[#283845]">
-                    {doctor?.rating}
-                  </span>{" "}
-                  rating
-                </p>
-              </div>
-            </div>
-            {doctor?.serviceCharges.length > 0 ? (
-              <div className="left-box-services min-h-[60px] w-full md:w-[350px] border border-[#d0d3d7] rounded-lg px-2 py-1 my-3">
-                {doctor?.serviceCharges.map((services, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between border-b border-gray-300 py-2 last:border-b-0"
-                  >
-                    <div className="text-[#283845]">
-                      <p className="font-semibold">{services?.service?.name}</p>
-                      <p>{services?.service?.description}</p>
+      <div className="xl:grid xl:grid-cols-2">
+        {doctorData.map((doctor, index) => (
+          <div
+            key={index}
+            className="border border-none m-3 shadow-lg rounded-lg my-12 flex flex-col lg:flex lg:flex-col gap-5 py-4 px-6 max-w-[750px] xl:min-w-[750px] mx-auto"
+          >
+            <div className="upper-div flex flex-col lg:flex lg:flex-row flex-1">
+              <div className="upper-left-div flex-1">
+                <div className="upper-left-upper-div flex mb-5 lg:border-none my-2 gap-3">
+                  <img
+                    className="h-16 w-16 rounded-full md:h-20 md:w-20 object-contain"
+                    src={
+                      doctor?.user?.profile_picture_url ||
+                      "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2281862025.jpg"
+                    }
+                  ></img>
+                  <div className="flex flex-col gap-5">
+                    <div className="upper-left-upper-right-div">
+                      <h1 className="text-[#053c5e] font-bold text-[18px]">
+                        {doctor?.user?.first_name} {doctor?.user?.last_name}{" "}
+                      </h1>
+                      <p>
+                        {doctor?.qualifications}, {doctor?.specialization}
+                      </p>
+                      <p>{doctor?.doctor_type}</p>
                     </div>
-                    <p className="font-medium text-[#283845]">
-                      {services?.currency} {services?.service_charges}
-                    </p>
+                    <div className="upper-left-lower-div flex gap-12 justify-evenly lg:items-start lg:justify-start">
+                      <p>
+                        <span className="font-semibold">Reviews</span>
+                        <br></br>
+                        <span className="flex gap-1">
+                          {doctor?.rating}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="#ffb955"
+                            className="size-4 self-center"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                      </p>
+                      <p>
+                        <span className="font-semibold">Experience</span>
+                        <br></br>
+                        {doctor?.experience || "N/A"}
+                      </p>
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
-            ) : (
-              <p className="m-4 sm:mx-8 md:mx-16 lg:mx-28 mt-3 text-gray-500">
-                No Services found
-              </p>
-            )}
-            <div className="left-box px-2 py-1 w-full md:w-[350px] min-h-[70px] border border-[#d0d3d7] rounded-lg flex justify-between items-center text-[#283845]">
-              <div>
-                <p className="font-medium">Online Consultation</p>
-                <p
-                  className={
-                    doctor?.consultation_mode === "online"
-                      ? "text-green-500"
-                      : "text-red-600"
-                  }
-                >
-                  {doctor?.consultation_mode}
+              <div className="upper-right-div flex-1">
+                <button className="cursor-pointer border boder-black w-full md:w-[250px] h-[50px] rounded-lg bg-[#1f7a8c] hover:bg-[#50828b] text-white">
+                  Book an appointment
+                </button>
+                {doctor?.hospitals.length > 0 ? (
+                  <div className="hospitals mt-2 border border-[#d0d3d7] rounded-lg px-2 py-1 w-full md:w-[250px] sm:mx-8 md:mx-0 lg:mx-0">
+                    {doctor?.hospitals.map((h, index) => (
+                      <div
+                        key={index}
+                        className="border-b border-gray-300 py-2 last:border-b-0 text-[#283845] "
+                      >
+                        <p className="font-medium">
+                          {/* <span className="font-medium">Hospital Name:</span>{" "} */}
+                          {h.name || "N/A"}
+                        </p>
+                        <p>
+                          <span className="font-medium">Dep:</span>{" "}
+                          {h.department?.medical_department?.name || "N/A"}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mx-4 sm:mx-8 md:mx-16 lg:mx-2 mt-3 text-gray-500">
+                    No hospitals found
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="lower-div flex flex-col lg:flex lg:flex-row flex-1 lg:gap-5 lg:items-stretch">
+              <div className="left-box p-2 lg:my-3 w-full md:w-[350px] min-h-[60px] md:h-[70px] border border-[#d0d3d7] rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center md:self-end text-[#283845]">
+                <div>
+                  <p className="font-medium">Online Consultation</p>
+                  <p
+                    className={
+                      doctor?.consultation_mode === "online"
+                        ? "text-green-500"
+                        : "text-red-600"
+                    }
+                  >
+                    {doctor?.consultation_mode}
+                  </p>
+                </div>
+                <p className="font-medium self-end">
+                  PKR {doctor?.consultation_fee}
                 </p>
               </div>
-              <p className="font-medium">Rs. {doctor?.consultation_fee}</p>
+              {doctor?.serviceCharges.length > 0 ? (
+                <div className="left-box-services flex-col min-h-[60px] w-full md:w-[350px] md:min-w-[350px] lg:w-auto border border-[#d0d3d7] rounded-lg my-3 lg:flex ">
+                  {doctor?.serviceCharges.map((services, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col sm:flex-row sm:justify-between sm:items-start border-b border-gray-300 p-2 last:border-b-0 lg:border-gray-300 lg:last:border-r-0"
+                    >
+                      <div className="text-[#283845] flex-1">
+                        <p className="font-semibold">
+                          {services?.service?.name}
+                        </p>
+                        <p>{services?.service?.description}</p>
+                      </div>
+                      <p className="font-medium text-[#283845] self-end">
+                        {services?.currency} {services?.service_charges}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="m-4 sm:mx-8 md:mx-16 lg:mx-28 mt-3 text-gray-500">
+                  {/* No Services found */}
+                </p>
+              )}
             </div>
           </div>
-          <div className="right-div flex flex-col items-center flex-1 mt-4 md:mt-5 md:ml-5 gap-1 md:items-start lg:justify-center lg:items-start">
-            <button className="border border-[#283845] w-full md:w-[200px] h-[50px] rounded-lg hover:bg-[#283845] hover:text-white">
-              Online consultation
-            </button>
-            <button className="border boder-black w-full md:w-[200px] h-[50px] rounded-lg bg-[#f29559] hover:bg-[#f5b387]">
-              Book an appointment
-            </button>
-            <p className="text-[#4f5b67]">
-              Waiting Time:{" "}
-              <span className="text-[#283845] font-medium">
-                {doctor?.waiting_time}
-              </span>
-            </p>
+        ))}
 
-            {doctor?.hospitals.length > 0 ? (
-              <div className="hospitals mt-5 border border-[#d0d3d7] rounded-lg px-2 py-1 w-full md:w-[400px] mx-4 sm:mx-8 md:mx-0 lg:mx-0">
-                {doctor?.hospitals.map((h, index) => (
-                  <div
-                    key={index}
-                    className="border-b border-gray-300 py-2 last:border-b-0 text-[#283845]"
-                  >
-                    <p>
-                      <span className="font-medium">Hospital Name:</span>{" "}
-                      {h.name || "N/A"}
-                    </p>
-                    <p>
-                      <span className="font-medium">Department:</span>{" "}
-                      {h.department?.medical_department?.name || "N/A"}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="mx-4 sm:mx-8 md:mx-16 lg:mx-28 mt-3 text-gray-500">
-                No hospitals found
-              </p>
-            )}
-          </div>
-        </div>
-      ))}
-
-      <button
-        onClick={handleSignOut}
-        className="w-full h-12 bg-[#BEEBD4] text-[#1D3D27] font-semibold rounded-md hover:bg-[#809D8E] hover:text-white"
-      >
-        Sign Out
-      </button>
+        <button
+          onClick={handleSignOut}
+          className="w-full h-12 bg-[#BEEBD4] text-[#1D3D27] font-semibold rounded-md hover:bg-[#809D8E] hover:text-white"
+        >
+          Sign Out
+        </button>
+      </div>
     </>
   );
 }
