@@ -84,7 +84,7 @@ export default function Dashboard() {
         {doctorData.map((doctor, index) => (
           <div
             key={index}
-            className="border border-none m-3 shadow-lg rounded-lg my-12 flex flex-col lg:flex lg:flex-col gap-5 py-4 px-6 max-w-[750px] xl:min-w-[750px] mx-auto"
+            className=" m-3 shadow-lg md:border md:border-gray-100 xl:border-none rounded-lg my-12 flex flex-col lg:flex lg:flex-col gap-5 py-4 px-6 max-w-[750px] xl:min-w-[750px] mx-auto"
           >
             <div className="upper-div flex flex-col lg:flex lg:flex-row flex-1">
               <div className="upper-left-div flex-1">
