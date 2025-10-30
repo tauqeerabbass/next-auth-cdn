@@ -3,6 +3,7 @@ import { Alert, Snackbar } from "@mui/material";
 import { getToken } from "next-auth/jwt";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
@@ -41,6 +42,25 @@ export default function Dashboard() {
     }
   };
 
+  const getPatients = async () => {
+    const res = await fetch(process.env.NEXT_PUBLIC_PATIENTS_API, {
+      headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch patients");
+    }
+
+    const data = await res.json();
+    console.log("Patients Data (Server Action):", data.data[0]);
+
+    localStorage.setItem("PatientsData", JSON.stringify(data?.data))
+    router.push("/Tables", data);
+  };
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
@@ -72,6 +92,7 @@ export default function Dashboard() {
     }
   }
 
+
   const doctorData = docData?.data;
 
   // console.log("doctors: ", doctorData);
@@ -84,9 +105,9 @@ export default function Dashboard() {
         {doctorData.map((doctor, index) => (
           <div
             key={index}
-            className=" m-3 shadow-lg md:border md:border-gray-100 xl:border-none rounded-lg my-12 flex flex-col lg:flex lg:flex-col gap-5 py-4 px-6 max-w-[750px] xl:min-w-[750px] mx-auto"
+            className="m-3 shadow-md md:border md:border-gray-100 xl:border-none rounded-lg my-12 flex flex-col lg:flex lg:flex-col gap-5 py-4 px-6 max-w-[750px] xl:min-w-[750px] mx-auto"
           >
-            <div className="upper-div flex flex-col lg:flex lg:flex-row flex-1">
+            <div className="upper-div flex flex-col md:flex md:flex-row flex-1">
               <div className="upper-left-div flex-1">
                 <div className="upper-left-upper-div flex mb-5 lg:border-none my-2 gap-3">
                   <img
@@ -164,8 +185,8 @@ export default function Dashboard() {
                 )}
               </div>
             </div>
-            <div className="lower-div flex flex-col lg:flex lg:flex-row flex-1 lg:gap-5 lg:items-stretch">
-              <div className="left-box p-2 lg:my-3 w-full md:w-[350px] min-h-[60px] md:h-[70px] border border-[#d0d3d7] rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center lg:self-end text-[#283845]">
+            <div className="lower-div flex flex-col md:flex md:flex-row flex-1 md:gap-5 md:items-stretch">
+              <div className="left-box p-2 md:my-3 w-full md:w-[350px] min-h-[60px] md:h-[70px] border border-[#d0d3d7] rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center md:self-end text-[#283845]">
                 <div>
                   <p className="font-medium">Online Consultation</p>
                   <p
@@ -212,9 +233,15 @@ export default function Dashboard() {
 
         <button
           onClick={handleSignOut}
-          className="w-full h-12 bg-[#BEEBD4] text-[#1D3D27] font-semibold rounded-md hover:bg-[#809D8E] hover:text-white"
+          className="w-full h-12  bg-[#BEEBD4] text-[#1D3D27] font-semibold rounded-md hover:bg-[#809D8E] hover:text-white cursor-pointer"
         >
           Sign Out
+        </button>
+        <button
+          onClick={getPatients}
+          className="w-full h-12 bg-[#BEEBD4] text-[#1D3D27] font-semibold rounded-md hover:bg-[#809D8E] hover:text-white cursor-pointer"
+        >
+          Go to Tables page
         </button>
       </div>
     </>
